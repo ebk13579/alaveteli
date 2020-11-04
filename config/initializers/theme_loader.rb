@@ -25,6 +25,12 @@ def require_theme(theme_name)
   )
 end
 
+Rails.configuration.paths.add(
+  'config/refusal_advice',
+   with: Rails.root.join('config/refusal_advice'),
+   glob: '*.yml'
+)
+
 if Rails.env == "test"
   # By setting this ALAVETELI_TEST_THEME to a theme name, theme tests can run in the Rails
   # context with the theme loaded. Otherwise the themes from the config aren't loaded in testing
