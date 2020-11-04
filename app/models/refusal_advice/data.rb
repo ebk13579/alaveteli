@@ -3,8 +3,8 @@ require 'yaml'
 # Parses refusal advice from data files and flattens into a single data
 # structure.
 class RefusalAdvice::Data
-  def self.from_yaml(glob)
-    yamls = Dir.glob(glob).map { |file| YAML.load(File.read(file)) }
+  def self.from_yaml(files)
+    yamls = files.map { |file| YAML.load(File.read(file)) }
     new(yamls)
   end
 

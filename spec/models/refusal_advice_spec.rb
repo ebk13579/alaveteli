@@ -1,7 +1,23 @@
 require 'spec_helper'
 
 RSpec.describe RefusalAdvice do
-  let(:glob) { Rails.root + 'spec/fixtures/refusal_advice/*.yml' }
+  let(:glob) do
+    Dir.glob(Rails.root + 'spec/fixtures/refusal_advice/*.yml')
+  end
+
+  describe '.default' do
+    subject { described_class.default }
+
+    before do
+      Rails.configuration.paths.add(
+        'config/refusal_advice',
+         with: Rails.root.join('spec/fixtures/refusal_advice'),
+         glob: '*.yml'
+      )
+    end
+
+    it { is_expected.to eq(described_class.load(glob)) }
+  end
 
   describe '.load' do
     subject { described_class.load(glob) }

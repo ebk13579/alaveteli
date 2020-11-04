@@ -3,7 +3,9 @@ require 'spec_helper'
 require_dependency 'refusal_advice/data'
 
 RSpec.describe RefusalAdvice::Data do
-  let(:glob) { Rails.root + 'spec/fixtures/refusal_advice/data/*.yml' }
+  let(:glob) do
+    Dir.glob(Rails.root + 'spec/fixtures/refusal_advice/data/*.yml')
+  end
 
   let(:fixture_data) do
     [ { eir: [ { hello: 'world' } ] },

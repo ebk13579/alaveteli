@@ -1,7 +1,12 @@
 # A collection of Questions that help users challenge refusals.
 class RefusalAdvice
+  def self.default
+    files = Rails.configuration.paths['config/refusal_advice'].existent
+    new(RefusalAdvice::Data.from_yaml(files))
+  end
+
   def self.load(glob)
-    new(RefusalAdvice::Data.from_yaml(glob))
+    new(RefusalAdvice::Data.from_yaml(Dir.glob(glob)))
   end
 
   def initialize(data)
