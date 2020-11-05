@@ -1,0 +1,21 @@
+<div class="wizard__question wizard__question--future">
+  <fieldset>
+    <legend>
+      <%= render question.label.to_h %>
+    </legend>
+
+    <% if question.options.size > 2 %>
+      <div class="wizard__options wizard__options--grid">
+        <% question.options.each do |option| %>
+          <%= refusal_advice_checkbox(question, option) %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="wizard__options wizard__options--list">
+        <% question.options.each do |option| %>
+          <%= refusal_advice_radio(question, option) %>
+        <% end %>
+      </div>
+    <% end %>
+  </fieldset>
+</div>
