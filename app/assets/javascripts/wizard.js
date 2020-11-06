@@ -1,8 +1,6 @@
 (function ($) {
 
-  var WIZARD_PLUGIN_NS = 'refusalWizard';
-
-  var Plugin = function (target, options) {
+  var RefusalWizard = function (target, options) {
     this.$el = $(target);
 
     var defaults = {
@@ -22,7 +20,7 @@
     return this;
   };
 
-  Plugin.prototype._init = function (target, options) {
+  RefusalWizard.prototype._init = function (target, options) {
     var _this = this;
     this._updateTotals();
     this._updateUI();
@@ -32,13 +30,13 @@
     });
   };
 
-  Plugin.prototype._updateTotals = function () {
+  RefusalWizard.prototype._updateTotals = function () {
     this.totalQuestions = this.$el.find('.' + this.options.questionClass).length;
     this.totalAnswered = this.$el.find('.' + this.options.pastQuestionClass).length;
     this.totalUnanswered = this.totalQuestions - this.totalAnswered;
   };
 
-  Plugin.prototype._updateUI = function () {
+  RefusalWizard.prototype._updateUI = function () {
     console.log(this);
     var remainingString = '' + this.totalUnanswered + ' question' + (this.totalUnanswered === 1 ? '' : 's') + ' remaining';
     var progressPercent = ( this.totalQuestions - this.totalUnanswered ) / this.totalQuestions * 100;
@@ -52,7 +50,7 @@
     });
   };
 
-  Plugin.prototype._submitAnswer = function() {
+  RefusalWizard.prototype._submitAnswer = function() {
     var $current = this.$el.find('.' + this.options.currentQuestionClass);
     var $next = $current.next('.' + this.options.questionClass);
 
@@ -68,16 +66,16 @@
   // Declare public methods here. They should return the
   // plugin target (this.$el) for jQuery chaining, eg:
   //
-  // Plugin.prototype.examplePublicMethod = function () {
+  // RefusalWizard.prototype.examplePublicMethod = function () {
   //   return this.$el;
   // };
 
-  $.fn[ WIZARD_PLUGIN_NS ] = function( methodOrOptions ) {
+  $.fn[ 'refusalWizard' ] = function( methodOrOptions ) {
     if ( !$(this).length ) {
       return $(this);
     }
 
-    var instance = $(this).data(WIZARD_PLUGIN_NS);
+    var instance = $(this).data('refusalWizard');
     var wantsToCallPublicMethod = (
       instance
       && methodOrOptions.indexOf('_') != 0
@@ -93,8 +91,8 @@
       return instance[ methodOrOptions ]( Array.prototype.slice.call( arguments, 1 ) );
 
     } else if ( wantsToInitialise ) {
-      instance = new Plugin( $(this), methodOrOptions );
-      $(this).data( WIZARD_PLUGIN_NS, instance );
+      instance = new RefusalWizard( $(this), methodOrOptions );
+      $(this).data( 'refusalWizard', instance );
       return $(this);
 
     } else if ( !instance ) {
