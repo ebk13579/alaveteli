@@ -30,6 +30,7 @@
     });
   };
 
+  // TODO: Totals need to take into account "future" questions that can’t be reached
   RefusalWizard.prototype._updateTotals = function () {
     this.totalQuestions = this.$el.find('.' + this.options.questionClass).length;
     this.totalAnswered = this.$el.find('.' + this.options.pastQuestionClass).length;

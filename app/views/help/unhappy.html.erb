@@ -11,60 +11,80 @@
         </legend>
         <div class="wizard__options wizard__options--grid">
           <div>
-            <input type="checkbox" id="refusal-reasons_section-1">
+            <input type="checkbox" name="refusal-reasons" value="section-1" id="refusal-reasons_section-1">
             <label for="refusal-reasons_section-1">Section 1 / Regulation 1</label>
           </div>
           <div>
-            <input type="checkbox" id="refusal-reasons_section-2">
+            <input type="checkbox" name="refusal-reasons" value="section-2" id="refusal-reasons_section-2">
             <label for="refusal-reasons_section-2">Section 2 / Regulation 2</label>
           </div>
           <div>
-            <input type="checkbox" id="refusal-reasons_section-5">
+            <input type="checkbox" name="refusal-reasons" value="section-5" id="refusal-reasons_section-5">
             <label for="refusal-reasons_section-5">Section 5 / Regulation 5</label>
           </div>
           <div>
-            <input type="checkbox" id="refusal-reasons_section-8">
+            <input type="checkbox" name="refusal-reasons" value="section-8" id="refusal-reasons_section-8">
             <label for="refusal-reasons_section-8">Section 8 / Regulation 8</label>
           </div>
           <div>
-            <input type="checkbox" id="refusal-reasons_section-12">
-            <label for="refusal-reasons_section-12">Section 12 / Regulation 12</label>
+            <input type="checkbox" name="refusal-reasons" value="section-12" id="refusal-reasons_section-12">
+            <label for="refusal-reasons_section-12"><span class="wizard-prototype-hint">Section 12 / Regulation 12</a></label>
           </div>
           <div>
-            <input type="checkbox" id="refusal-reasons_section-14">
+            <input type="checkbox" name="refusal-reasons" value="section-14" id="refusal-reasons_section-14">
             <label for="refusal-reasons_section-14">Section 14 / Regulation 14</label>
           </div>
           <div>
-            <input type="checkbox" id="refusal-reasons_section-16">
+            <input type="checkbox" name="refusal-reasons" value="section-16" id="refusal-reasons_section-16">
             <label for="refusal-reasons_section-16">Section 16 / Regulation 16</label>
           </div>
           <div>
-            <input type="checkbox" id="refusal-reasons_section-17">
+            <input type="checkbox" name="refusal-reasons" value="section-17" id="refusal-reasons_section-17">
             <label for="refusal-reasons_section-17">Section 17 / Regulation 17</label>
           </div>
         </div>
       </fieldset>
     </div>
 
-    <div class="wizard__question wizard__question--future">
+    <div class="wizard__question wizard__question--future" data-showif-id="refusal-reasons" data-showif-operator="contains" data-showif-value="12">
       <fieldset>
         <legend>
           Has the authority confirmed or denied whether they hold the information you have requested?
         </legend>
         <div class="wizard__options wizard__options--list">
           <div>
-            <input type="radio" id="have-confirmation_yes" name="have-confirmation">
+            <input type="radio" name="have-confirmation" value="yes" id="have-confirmation_yes">
             <label for="have-confirmation_yes">Yes</label>
           </div>
           <div>
-            <input type="radio" id="have-confirmation_no" name="have-confirmation">
-            <label for="have-confirmation_no">No</label>
+            <input type="radio" name="have-confirmation" value="no" id="have-confirmation_no">
+            <label for="have-confirmation_no"><span class="wizard-prototype-hint">No</span></label>
           </div>
         </div>
       </fieldset>
     </div>
 
-    <div class="wizard__question wizard__question--future">
+    <div class="wizard__question wizard__question--future" data-showif-id="have-confirmation" data-showif-operator="is" data-showif-value="no">
+      <fieldset>
+        <legend>
+          Has the body included a calculation or explanation of the costs involved in providing the information?
+        </legend>
+        <div class="wizard__options wizard__options--list">
+          <div>
+            <input type="radio" id="have-calculation_yes" name="have-calculation">
+            <label for="have-calculation_yes">Yes</label>
+          </div>
+          <div>
+            <input type="radio" id="have-calculation_no" name="have-calculation">
+            <label for="have-calculation_no">No</label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- ... -->
+
+    <div class="wizard__question wizard__question--future" data-showif-id="have-confirmation" data-showif-operator="is" data-showif-value="no">
       <fieldset>
         <legend>
           Have they stated that the cost of confirming or denying would exceed the appropriate limit?
@@ -76,7 +96,25 @@
           </div>
           <div>
             <input type="radio" id="is-confirmation-too-costly_no" name="is-confirmation-too-costly">
-            <label for="is-confirmation-too-costly_no">No</label>
+            <label for="is-confirmation-too-costly_no"><span class="wizard-prototype-hint">No</span></label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="wizard__question wizard__question--future" data-showif-id="refusal-reasons" data-showif-operator="contains" data-showif-value="12">
+      <fieldset>
+        <legend>
+          Has the body given an indication of what information could be provided within the appropriate limit?
+        </legend>
+        <div class="wizard__options wizard__options--list">
+          <div>
+            <input type="radio" id="has-indicated-what-could-be-provided_yes" name="has-indicated-what-could-be-provided">
+            <label for="has-indicated-what-could-be-provided_yes">Yes</label>
+          </div>
+          <div>
+            <input type="radio" id="has-indicated-what-could-be-provided_no" name="has-indicated-what-could-be-provided">
+            <label for="has-indicated-what-could-be-provided_no">No</label>
           </div>
         </div>
       </fieldset>
@@ -92,9 +130,23 @@
 
     <div class="wizard__suggestions">
       <h2>Next steps</h2>
-      <ul>
-        <li><a href="#">Request an internal review</a></li>
-        <li><a href="#">Reply for clarification</a></li>
+
+      <div class="wizard__suggestion" data-showif-id="is-confirmation-too-costly" data-showif-operator="is" data-showif-value="no">
+        <h3>You should reply for clarification</h3>
+        <ol>
+          <li>
+            <p><a href="https://www.legislation.gov.uk/ukpga/2000/36/section/1">Section 1(1) of the FOI Act</a> requires that an authority informs you “whether it holds information of the description specified in the request”. If they have not confirmed or denied whether they hold the information, and if they have not cited the cost limit as the reason, reply to the authority, requesting clarification on this point.</p>
+          </li>
+        </ol>
+        <p>Continue answering questions to see whether you have any additional grounds to strengthen your case.</p>
+        <a href="#">Help me write a reply</a>
+      </div>
+
+      <h2 class="js-wizard-generic-suggestions-header">Other routes</h2>
+
+      <ul class="js-wizard-generic-suggestions">
+        <li data-generic-suggestion-type="internal_review"><a href="#">Request an internal review</a></li>
+        <li data-generic-suggestion-type="reply"><a href="#">Reply for clarification</a></li>
         <li><a href="#">Refer your request to the Information Commissioner</a></li>
         <li><a href="#">Make a new request</a></li>
         <li><a href="#">Write to your MP</a></li>

@@ -6,6 +6,15 @@
   display: none;
 }
 
+.wizard__question[data-showif-id] {
+    display: none;
+
+    &.wizard__question--current,
+    &.wizard__question--past {
+        display: block;
+    }
+}
+
 .wizard__options {
   margin-top: -1rem;
 
@@ -63,4 +72,16 @@
   overflow: hidden;
   background-color: #008CBA;
   transition: width 0.6s ease;
+}
+
+.wizard__suggestion[data-showif-id] {
+    display: none;
+
+    &.wizard__suggestion--active {
+        display: block;
+    }
+}
+
+.js-wizard-generic-suggestions-header {
+    display: none;
 }
