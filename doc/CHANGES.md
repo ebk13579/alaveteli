@@ -2,6 +2,7 @@
 
 ## Highlighted Features
 
+* Prevent saving of unescaped characters in regexp Censor Rules (Gareth Rees)
 * Tweak change request button colours in admin interface (Gareth Rees)
 
 ## Upgrade Notes
