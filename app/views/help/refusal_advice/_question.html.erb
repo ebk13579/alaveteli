@@ -2,6 +2,7 @@
   <fieldset>
     <legend>
       <%= render question.label.to_h %>
+      <%= render question.hint.to_h if question.hint %>
     </legend>
 
     <% if question.options.size > 2 %>

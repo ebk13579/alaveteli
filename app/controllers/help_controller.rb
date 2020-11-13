@@ -25,6 +25,11 @@ class HelpController < ApplicationController
         .not_embargoed
           .find_by_url_title!(params[:url_title])
     end
+
+    legislation = :foi
+    @refusal_advice = RefusalAdvice.default
+    @questions = @refusal_advice.questions(legislation)
+    @suggestions = @refusal_advice.suggestions(legislation)
   end
 
   def contact

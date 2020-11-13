@@ -2,11 +2,11 @@
 class RefusalAdvice
   def self.default
     files = Rails.configuration.paths['config/refusal_advice'].existent
-    new(RefusalAdvice::Data.from_yaml(files))
+    new(Store.from_yaml(files))
   end
 
   def self.load(glob)
-    new(RefusalAdvice::Data.from_yaml(Dir.glob(glob)))
+    new(Store.from_yaml(Dir.glob(glob)))
   end
 
   def initialize(data)
@@ -14,7 +14,15 @@ class RefusalAdvice
   end
 
   def questions(legislation)
-    data[legislation.to_sym].map { |question| Question.new(question) }
+    data[legislation.to_sym].
+      select { |block| block[:question] }.
+      map { |question| Question.new(question[:question]) }
+  end
+
+  def suggestions(legislation)
+    data[legislation.to_sym].
+      select { |block| block[:suggestion] }.
+      map { |question| Suggestion.new(question[:suggestion]) }
   end
 
   def ==(other)
