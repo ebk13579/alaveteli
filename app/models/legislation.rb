@@ -12,7 +12,8 @@ class Legislation
         short: _('FOI'),
         full: _('Freedom of Information'),
         with_a: _('A Freedom of Information request'),
-        act: _('Freedom of Information Act')
+        act: _('Freedom of Information Act'),
+        refusals: ['s 12', 's 14', 's 40', 's 21', 's 31']
       ),
       new(
         key: 'eir',

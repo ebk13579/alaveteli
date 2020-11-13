@@ -23,6 +23,25 @@
                             :body => incoming_message.get_body_for_html_display(@collapse_quotes),
                             :attachments => incoming_message.get_attachments_for_display }  %>
 
+    <% if incoming_message.refusals.any? %>
+      <div style="padding: 0 1.2em;">
+        <p>
+          <%= _('We think this response is a refusal of your request. The '\
+                'refusals quoted in the response are:') %>
+        </p>
+        <ul>
+          <% incoming_message.refusals.each do |refusal| %>
+            <li><%= refusal %></li>
+          <% end %>
+        </ul>
+        <p>
+          <a href="https://mysociety.github.io/foi-refusals-prototype/section-12" target="blank">
+            <%= _('What should I do next?') %>
+          </a>
+        </p>
+      </div>
+    <% end %>
+
     <p class="event_actions">
       <% if !@user.nil? && @user.admin_page_links? %>
         <%= link_to "Admin", edit_admin_incoming_message_path(incoming_message.id) %>
