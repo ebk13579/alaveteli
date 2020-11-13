@@ -18,29 +18,31 @@
     <%= render :partial => 'request/hidden_correspondence', :locals => { :message => incoming_message } %>
   <%- else %>
     <%= render :partial => 'request/restricted_correspondence', :locals => {:message => incoming_message } %>
-    <%= render :partial => 'request/bubble',
-               :locals => { :incoming_message => incoming_message,
-                            :body => incoming_message.get_body_for_html_display(@collapse_quotes),
-                            :attachments => incoming_message.get_attachments_for_display }  %>
+
 
     <% if incoming_message.refusals.any? %>
-      <div style="padding: 0 1.2em;">
+      <div class="correspondence__suggestion">
+        <h2><%= _('Request refused?') %></h2>
         <p>
-          <%= _('We think this response is a refusal of your request. The '\
-                'refusals quoted in the response are:') %>
+          <%= _('It looks like {{authority_name}} has '\
+                'refused all or part of your request under '\
+                '<strong>{{exemptions}}</strong>.',
+                authority_name: @info_request.public_body.name,
+                exemptions: incoming_message.refusals.to_sentence
+                ) %>
         </p>
-        <ul>
-          <% incoming_message.refusals.each do |refusal| %>
-            <li><%= refusal %></li>
-          <% end %>
-        </ul>
         <p>
-          <a href="https://mysociety.github.io/foi-refusals-prototype/section-12" target="blank">
-            <%= _('What should I do next?') %>
+          <a href="#" class="button">
+            <%= _('Find out if you have grounds to appeal') %>
           </a>
         </p>
       </div>
     <% end %>
+
+    <%= render :partial => 'request/bubble',
+               :locals => { :incoming_message => incoming_message,
+                            :body => incoming_message.get_body_for_html_display(@collapse_quotes),
+                            :attachments => incoming_message.get_attachments_for_display }  %>
 
     <p class="event_actions">
       <% if !@user.nil? && @user.admin_page_links? %>

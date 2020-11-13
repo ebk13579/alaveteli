@@ -334,6 +334,17 @@ div.comment_in_request {
   background-color: mix(#fff, $color-delivery-unknown, 85%);
 }
 
+.correspondence__suggestion {
+  background-color: #eee;
+
+  h2 {
+    text-align: inherit;
+    font-size: 1.2em;
+    padding-left: 0;
+    padding-top: 0;
+  }
+}
+
 .toggle-delivery-log {
   padding-left: 8px + 16px;
   background: transparent none 0 50% no-repeat;
